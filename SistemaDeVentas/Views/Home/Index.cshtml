@@ -1,0 +1,76 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<div class="container" id="containerLogin">
+    <div class="col-12 col-md-12" style="text-align:-webkit-center">
+        <div class="col-12 col-md-6">
+            <img src="~/Images/Login.png" alt="Logo de la aplicacion" style="border-radius:10%">
+        </div>
+        <div class="col-12 col-md-3 pt-3">
+            <p>Usuario</p>
+            <input type="text" class="form-control" id="idUsuario" />
+        </div>
+        <div class="col-12 col-md-3 pt-3">
+            <p>Contaseña</p>
+            <input type="text" class="form-control" id="idContrasenia" />
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 pt-3" style="text-align:-webkit-center">
+                <button id="idIniciaSesion" class="btn btn-primary">Iniciar sesión</button>
+                <a href="@Url.Action("NuevoUsuario", "ValidaUsuarios")" class="btn btn-primary">Registrarse</a>
+             
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var emailRegex = /^[a-zA-Z0-9._%+-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    $(document).ready(function () {
+       
+        $('#idIniciaSesion').click(function () {
+
+            var DatosUsuarioModel = {
+                Correo : $('#idUsuario').val(),
+                Contrasenia : $('#idContrasenia').val()
+            }
+            if (ValidaDatos($("#idUsuario").val(), $("#idContrasenia").val()) === true) {
+                $.ajax({
+                    url: '@Url.Action("ValidaUsuariosRegistrado", "ValidaUsuarios")',
+                    type: "POST",
+                    data: JSON.stringify(DatosUsuarioModel),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: "json",
+                    success: function (response) {
+                        if (response === "NoDatos") {
+                            alert("Registro no encontrado, favor de validar contraseña y correo electronico ");
+                        }
+                        else {
+                            alert("Correo electronico registrado");
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log("Error en la solicitud AJAX:", textStatus, errorThrown);
+                    }
+                });
+            }
+        });
+    });
+    function ValidaDatos(idUsuario, idContraseña) {
+        if (idUsuario === "") {
+            alert("Favor de ingresar el correo");
+            return false;
+        }
+        if (idContraseña === "") {
+            alert("Favor de ingresar la contraseña");
+            return false;
+        }
+        if (!emailRegex.test(idUsuario)) {
+            alert("El correo electronico no es valido");
+            return false;
+        }
+        return true;
+    }
+</script>

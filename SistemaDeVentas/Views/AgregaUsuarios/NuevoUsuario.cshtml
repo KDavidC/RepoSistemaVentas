@@ -1,0 +1,74 @@
+﻿
+@model ML_Sistema_Ventas.DatosRegistroModel
+<body>
+    @using (Html.BeginForm("", "", FormMethod.Post, new { @id = "frmNuevoUs" }))
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-4 col-md-4">
+                    @Html.Label("Nombre Completo")
+                    @Html.TextBox("txtNombre", null, new { @class = "form-control borde", @id = "idNombre", @placeholder = "Nombre" })
+                </div>
+                <div class="col-4 col-md-4">
+                    @Html.Label("Apellido")
+                    @Html.TextBox("txtApellido", null, new { @class = "form-control borde", @id = "idApellido", @placeholder = "Apellido" })
+                </div>
+                <div class="col-4 col-md-4">
+                    @Html.Label("Edad")
+                    @Html.TextBox("txtEdad", null, new { @class = "form-control", @id = "idEdad", @placeholder = "Edad" })
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-4 col-md-4">
+                    <label>Correo:</label>
+                    @Html.TextBoxFor(model => model.Correo, new { @class = "form-control borde", @id = "idCorreo", @placeholder = "IngreseCorreo@gmail.com" })
+                </div>
+                <div class="col-4 col-md-4">
+                    <label>Contraseña:</label>
+                    @Html.TextBox("txtContrasenia", null, new { @class = "form-control borde", @id = "idContrasenia", @onchange = "HabilitaCont()" })
+                </div>
+                <div class="col-4 col-md-4">
+                    <label>Confirma contraseña:</label>
+                    @Html.TextBox("txtConfCont", null, new { @class = "form-control borde", @id = "idConfCont", @disabled = "disabled" })
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-4 col-md-4">
+                    <span>M</span><input type="radio" id="idRadioM" />&nbsp;&nbsp;&nbsp;
+                    <span>F</span><input type="radio" id="idRadioF" />&nbsp;&nbsp;&nbsp;
+                    <span>Otro</span><input type="radio" id="idOtro" />
+                </div>
+            </div>
+            <div class="col-12 col-md-12 AlineadoBtn pt-3">
+                <a href="@Url.Action("Index","Home")" class="btn btn-danger" id="idBtnRegresa" type="button">Regresar</a>
+                <button type="submit" class="btn btn-success" id="idBtnGuarda">Guardar</button>
+            </div>
+        </div>
+    }
+
+
+</body>
+<style>
+    .borde {
+        border-radius: 20px;
+    }
+    .AlineadoBtn{
+        text-align:right
+    }
+</style>
+@section Scripts{
+  <script>
+      function HabilitaCont() {
+          let ContraseniaConf = $('#idContrasenia').val();
+          if (ContraseniaConf != '') {
+              $('#idConfCont').prop('disabled',false);
+          }
+          else {
+              $('#idConfCont').prop('disabled', true);
+              $('#idConfCont').val("");
+          }
+
+      }
+  </script>
+}
+

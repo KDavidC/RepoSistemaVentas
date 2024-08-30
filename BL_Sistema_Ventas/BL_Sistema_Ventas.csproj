@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DL_Sistema_Ventas\DL_Sistema_Ventas.csproj" />
+    <ProjectReference Include="..\ML_Sistema_Ventas\ML_Sistema_Ventas.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+  </ItemGroup>
+</Project>

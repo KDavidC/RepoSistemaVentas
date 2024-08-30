@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+  <ItemGroup>
+    <None Remove="Controllers\AgregaUsuarios\" />
+    <None Remove="Views\AgregaUsuarios\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\AgregaUsuarios\" />
+    <Folder Include="Views\AgregaUsuarios\" />
+    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BL_Sistema_Ventas\BL_Sistema_Ventas.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\ML_Sistema_Ventas\ML_Sistema_Ventas.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
